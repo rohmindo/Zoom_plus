@@ -1,0 +1,4 @@
+int attr render_textureView 0x7f040001
+int raw zm_zcacert_pin 0x7f130001
+int[] styleable ZoomInstantSDKVideoView { 0x7f040001 }
+int styleable ZoomInstantSDKVideoView_render_textureView 0

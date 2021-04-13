@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Fragment_room">
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:onClick="onClick"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/purple_round_border"
+        android:text="방 입장하기"
+        android:id="@+id/joinroom"
+        />
+
+</FrameLayout>

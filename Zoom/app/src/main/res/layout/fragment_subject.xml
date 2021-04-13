@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#E2E2E2"
+    tools:context=".Fragment_subject">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:background="#E2E2E2"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:background="@color/Themacolor"
+                android:layout_width="match_parent"
+                android:layout_height="90dp">
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/profile_image"
+                        android:src="@drawable/profile_default"
+                        android:layout_width="60dp"
+                        android:layout_gravity="bottom"
+                        android:layout_marginBottom="16dp"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_height="60dp"/>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_marginLeft="4dp"
+                        android:orientation="vertical"
+                        android:layout_height="match_parent">
+                        <TextView
+                            android:layout_width="100dp"
+                            android:textColor="#ffffff"
+                            android:text="노민도"
+                            android:textSize="18dp"
+                            android:gravity="bottom"
+                            android:layout_weight="1"
+                            android:layout_height="0dp"
+                            />
+                        <TextView
+                            android:textColor="#ffffff"
+                            android:gravity="top"
+                            android:textSize="12dp"
+                            android:layout_width="100dp"
+                            android:text="정보통신대학\n소프트웨어학과"
+                            android:layout_weight="1"
+                            android:layout_height="0dp"
+                            />
+                    </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="horizontal"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:text="2021학년 1학기"
+                android:textStyle="bold"
+                android:gravity="center"
+
+                android:layout_gravity="center_horizontal"
+                android:textColor="#000000"
+                android:textSize="20dp"
+                android:layout_height="wrap_content"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"/>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="plus"
+                    android:clickable="true"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@drawable/plus_small"
+                     />
+            </LinearLayout>
+            <View
+                android:layout_marginHorizontal="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="0.2dp"
+                android:background="@color/Themacolor"
+                android:layout_gravity="center"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+
+</FrameLayout>

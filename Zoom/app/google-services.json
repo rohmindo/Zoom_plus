@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "95014357110",
+    "project_id": "zoom-plusplus",
+    "storage_bucket": "zoom-plusplus.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:95014357110:android:1e50d86aa868ff79953757",
+        "android_client_info": {
+          "package_name": "com.example.zoom"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "95014357110-h3jvun8bpeq83jcm24giuic51idua1qq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.zoom",
+            "certificate_hash": "046db1e216c5e20da0ccc2d0c7ccaac7c6ef9f3c"
+          }
+        },
+        {
+          "client_id": "95014357110-otrku4aacspv0f6cj736i2fppp5jai3j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB0j_eDNV23sWu2aMHJxZeP-IoimZnHz78"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "95014357110-otrku4aacspv0f6cj736i2fppp5jai3j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,4 @@
+us.zoom.videomeetings
+attr render_textureView
+raw zm_zcacert_pin
+styleable ZoomInstantSDKVideoView render_textureView

@@ -1,0 +1,61 @@
+<resources>
+    <string name="app_name">Zoom++</string>
+    <string name="app_domain">http://13.125.234.161:3000</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="signup_policy"><font color="#407ad6"><u>이용약관</u></font> 및 <font color="#407ad6"><u>개인정보취급방침</u></font>에 동의합니다.(필수)</string>
+    <string name="description"><font color="#407ad6"><u>DisBoard</u></font>에 오신걸 환영합니다!\n정보를 기입해주세요!</string>
+    <string name="IP_ADDRESS">http://3.133.119.255:3000/</string>
+    <string name="signup_pro"><b><font size="20">교수님으로 가입</font></b><font size="13">\n\n수업을 개설하고 싶어요</font></string>
+    <string name="signup_stu"><b><font size="20">학생으로 가입</font></b><font size="13">\n\n수업에 참여하고 싶어요</font></string>
+    <string name="title_activity_fullscreen">FullscreenActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+
+    <string name="create">Create</string>
+    <string name="join">Join</string>
+    <string name="launch_setting_title">Instant SDK Playground</string>
+    <string name="launch_setting_settings">Settings</string>
+    <string name="launch_setting_feedback">Zoom Instant SDK</string>
+    <string name="launch_setting_version">Version:v%s</string>
+
+    <string name="cancel">Cancel</string>
+    <string name="actionbar_done">Done</string>
+
+    <string name="create_title">Create a Session</string>
+    <string name="join_title">Join a Session</string>
+    <string name="session_name">Session Name</string>
+    <string name="session_name_hint">Required</string>
+    <string name="session_name_digits">0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ !#$%&#038;()+-:;&#060;&#061;.&#062;?@[]^_{}|~,</string>
+    <string name="your_name">Your Name</string>
+    <string name="your_name_hint">Required</string>
+    <string name="password">Password</string>
+    <string name="password_hint">Optional</string>
+    <string name="renderer">Renderer</string>
+    <string name="wrong_pass_tips">Wrong password.Try again</string>
+    <string name="copy_tips">Copied to clipboard</string>
+
+    <string name="renderer_option">Renderer Options</string>
+    <string name="renderer_option_zoom">Zoom renderer</string>
+    <string name="renderer_option_zoom_tips">Rendering with Zoom renderer</string>
+    <string name="renderer_option_opengl">OpenGL ES renderer</string>
+    <string name="renderer_option_opengl_tips">Rendering YUV420 raw data with OpenGL ES</string>
+
+    <string name="setting_title">Settings</string>
+
+    <string name="share_title">Share</string>
+    <string name="share_screen">Share Device Screen</string>
+    <string name="share_screen_info">Everything on your device screen will be shared</string>
+    <string name="share_picture">Share a Picture</string>
+    <string name="share_picture_info">Share a picture from your device</string>
+
+    <string name="leave_message">Do you want to leave this session?</string>
+    <string name="leave_end_text">End Session</string>
+    <string name="leave_leave_text">Leave Session</string>
+
+    <string name="setting_send_email">Send Logs By Email</string>
+    <string name="setting_clean_logs">Clean all logs</string>
+    <string name="setting_email_notice">Your email account needs to be set up and configured in your OS before using \"Send Logs By Email\".</string>
+
+</resources>

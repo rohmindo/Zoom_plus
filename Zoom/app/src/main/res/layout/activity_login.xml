@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#ffffff"
+    android:layout_gravity="center"
+    android:gravity="center"
+    tools:context=".LoginActivity">
+
+    <LinearLayout
+        android:layout_weight="2"
+        android:layout_width="match_parent"
+        android:background="@drawable/login_background"
+        android:layout_height="0dp"
+        android:layout_marginVertical="60dp"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="52dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="12dp"
+            android:src="@drawable/loggo_prev" />
+
+        <ImageView
+            android:id="@+id/textView"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/loggo_text"
+            android:text="TextView" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:text="Disboard에 오신 걸 환영합니다"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:textColor="#000000"
+            android:textSize="66px"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:layout_marginTop="16dp"
+            android:gravity="center"
+            android:lineSpacingExtra="8dp"
+            android:text="교수와 학생의 활발한 Communication을\nDisboard에서 함께 느껴보세요"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <Button
+            android:layout_marginTop="36dp"
+            android:layout_gravity="center"
+            android:id="@+id/btn_googleSignIn"
+            android:drawableLeft="@drawable/google_left"
+            android:text="구글 계정으로 로그인"
+            android:textColor="#000000"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            style="?android:attr/borderlessButtonStyle"
+            android:background="@drawable/login_round_border"
+            android:layout_width="match_parent"
+            android:layout_marginHorizontal="36dp"
+            android:layout_height="60dp"
+            android:elevation="2dp"
+            android:paddingHorizontal="10dp"
+            android:paddingBottom="2dp"
+            />
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

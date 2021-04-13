@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/dp_280"
+    android:layout_height="wrap_content"
+    android:background="@drawable/dialog_bg"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="61dp"
+        android:gravity="center_vertical"
+        android:paddingLeft="24dp"
+        android:text="More"
+        android:textColor="#232333"
+        android:textSize="20sp" />
+
+    <LinearLayout
+        android:id="@+id/llSpeaker"
+        android:layout_width="match_parent"
+        android:layout_height="66dp"
+        android:background="@drawable/more_action_bg"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="24dp"
+        android:paddingRight="16dp">
+
+        <TextView
+            android:id="@+id/tvSpeaker"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Turn off Speaker"
+            android:textColor="#232333"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:id="@+id/ivSpeaker"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/icon_speaker_on" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llSwitchCamera"
+        android:layout_width="match_parent"
+        android:layout_height="66dp"
+        android:background="@drawable/more_action_last_bg"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="24dp"
+        android:paddingRight="16dp">
+
+        <TextView
+            android:id="@+id/tvSwitchCamera"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Switch Camera"
+            android:textColor="#232333"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:id="@+id/ivSwitchCamera"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/icon_switchcamera" />
+    </LinearLayout>
+
+</LinearLayout>
