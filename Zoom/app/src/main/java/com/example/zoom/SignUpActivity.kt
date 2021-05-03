@@ -3,7 +3,6 @@ package com.example.zoom
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.graphics.Color
-import android.os.AsyncTask
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -11,16 +10,13 @@ import android.widget.CompoundButton
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.example.zoom.httpconnection.HttpConnection
+import com.example.zoom.httpconnection.HttpConnection_join
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_sign_up.*
 import okhttp3.*
-import java.io.BufferedReader
-import java.io.IOException
-import java.io.InputStream
-import java.io.InputStreamReader
-import java.net.HttpURLConnection
-import java.net.URL
+import org.json.JSONObject
+import java.net.CookieManager
 
 class SignUpActivity : AppCompatActivity() {
     //교수인지 학생인지 check해주는 value
@@ -29,6 +25,8 @@ class SignUpActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up)
+
+
 
         //이미 가입된거면 바로 메인화면으로
         var mAuth= FirebaseAuth.getInstance()
@@ -41,17 +39,29 @@ class SignUpActivity : AppCompatActivity() {
 
         val user=mAuth.currentUser
         var email=user.email
-        var photourl=user.photoUrl
 
-        //이미 가입이 되어있는지 확인
-        Log.d("emaild", email)
-
+        //이미 로그인 정보가 있을 시 쿠키받아오고 메인화면으로 이동
         ///auth/login통신
-        var t=HttpConnection()
+        var t=HttpConnection(getString(R.string.app_domain),email);
         t.result()
         var tee=t.temp
         //통신결과 tee로 전달됨
-        Log.d("values",tee)
+        val jObject = JSONObject(tee)
+        val logInisSuccess=jObject.getString("success")
+        Log.d("logintest",logInisSuccess)
+        //만약 기존의 로그인 정보가 있다면 메인화면으로 이동
+        if(logInisSuccess=="true"){
+            val intent=Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+
+        //subject/joint test
+        var tt= HttpConnection_join()
+        tt.result2()
+        var teee=tt.temp
+        //통신결과 tee로 전달됨
+        Log.d("valuess", teee)
 
         //회원가입 버튼
         btn_signup.setOnClickListener {

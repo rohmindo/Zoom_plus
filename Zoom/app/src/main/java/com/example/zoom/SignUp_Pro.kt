@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import com.example.zoom.R.string.app_domain
+import com.example.zoom.httpconnection.HttpConnection_SignUp_Student
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -38,7 +39,13 @@ class SignUp_Pro : AppCompatActivity() {
             var pro_major=major.text.toString()
             val intent= Intent(this,MainActivity::class.java)
             //db 저장
-            HttpCheckId("professor",pro_name,user.email,user.photoUrl.toString(),pro_school,pro_major,"11",pro_stid)
+            //HttpCheckId("professor",pro_name,user.email,user.photoUrl.toString(),pro_school,pro_major,"11",pro_stid)
+            var t= HttpConnection_SignUp_Student(getString(app_domain),"professor",pro_name,user.email,user.photoUrl.toString(),pro_school,pro_major,"11",pro_stid);
+            t.result()
+            var tee=t.temp;
+            Log.d("rerere",tee)
+
+
             startActivity(intent)
             finish()
         }

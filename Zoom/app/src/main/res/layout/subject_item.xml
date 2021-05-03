@@ -29,6 +29,7 @@
     <TextView
         android:layout_marginTop="4dp"
         android:layout_marginBottom="2dp"
+
         android:textSize="14dp"
         android:text=".임장순"
         android:gravity=""

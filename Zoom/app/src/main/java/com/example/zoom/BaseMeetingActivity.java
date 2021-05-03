@@ -782,14 +782,21 @@ public class BaseMeetingActivity extends AppCompatActivity implements ZoomInstan
 
     public void onClickMore(View view) {
         AlertDialog.Builder dlg = new AlertDialog.Builder(this);
-        dlg.setTitle("계발에서 개발까지"); //제목
-        final String[] versionArray = new String[] {"계발","에서","개발"};
+        dlg.setTitle("추가 항목을 선택하세요"); //제목
+        final String[] versionArray = new String[] {"참가자","채팅","퀴즈"};
         dlg.setIcon(R.drawable.loggo_prev); // 아이콘 설정
 
         dlg.setItems(versionArray, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                Log.d("input",versionArray[which]);
+               //채팅
+               if(which==1){
+                   Intent intent=new Intent(getApplicationContext(),ChatActivity.class);
+                   startActivity(intent);
+               }
+               //Intent intent=new Intent(getApplicationContext(),SignUp_Student.class);
+               //startActivity(intent);
             }
         });
 //                버튼 클릭시 동작

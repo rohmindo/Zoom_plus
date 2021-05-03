@@ -18,19 +18,31 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
-public class HttpConnection extends AsyncTask<String, Void, String> {
+public class HttpConnection_SignUp_Student extends AsyncTask<String, Void, String> {
     public String temp="";
-    public String cookiee="";
+    public String type="";
     public String app_domain="";
+    public String name="";
     public String email="";
-    public HttpConnection(String app_domain,String email){
+    public String phtourl="";
+    public String school="";
+    public String major="";
+    public String grade="";
+    public String identityID="";
+    public HttpConnection_SignUp_Student(String app_domain,String type,String name,String email,String phtourl,String school,String major,String grade,String stid){
         this.app_domain=app_domain;
         this.email=email;
+        this.name=name;
+        this.type=type;
+        this.phtourl=phtourl;
+        this.school=school;
+        this.major=major;
+        this.grade=grade;
+        this.identityID=stid;
     }
     public String result() throws ExecutionException, InterruptedException {
-        HttpConnection insertdata = new HttpConnection(app_domain,email);
-        temp=insertdata.execute(app_domain+"/api/auth/login",email).get();
-
+        HttpConnection_SignUp_Student insertdata = new HttpConnection_SignUp_Student(app_domain,type,name,email,phtourl,school,major,grade,identityID);
+        temp=insertdata.execute(app_domain+"/api/auth/signup",email).get();
         return temp;
     }
     @Override
@@ -52,16 +64,17 @@ public class HttpConnection extends AsyncTask<String, Void, String> {
     protected String doInBackground(String... params) {
         String result="";
         String serverurl = params[0];
-        String email_value = params[1];
-        String postparameters = "email="+email_value;
+        //String email_value = params[1];
+        String postparameters = "type="+type+"&email="+email+"&name="+name+"&photourl="+phtourl+"&school="+school+"&major="+major
+                +"&grade="+grade+"&identityID="+identityID;
         Log.d("testinput",postparameters);
         try{
             URL url = new URL(serverurl);
 
+
             HttpURLConnection conn = (HttpURLConnection)url.openConnection();
             conn.setConnectTimeout(5000);
             conn.setUseCaches(false);
-            conn.usingProxy();
             conn.setRequestMethod("POST");
 
             conn.connect();
@@ -73,19 +86,7 @@ public class HttpConnection extends AsyncTask<String, Void, String> {
             outputstream.flush();
             outputstream.close();
 
-            Map m = conn.getHeaderFields();
 
-            if(m.containsKey("Set-Cookie")) {
-                Collection c =(Collection)m.get("Set-Cookie");
-                for(Iterator i = c.iterator(); i.hasNext(); ) {
-                    cookiee = (String)i.next();
-                }
-
-                System.out.println("server response cookie:" + cookiee);
-            }
-            CookieManager cookieManager = CookieManager.getInstance();
-            cookieManager.setCookie("http://disboard13.kro.kr",cookiee);
-            //Log.d("plzco",cookieString);
 
             InputStream inputstream;
 

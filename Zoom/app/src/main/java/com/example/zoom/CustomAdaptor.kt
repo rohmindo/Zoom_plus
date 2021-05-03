@@ -1,10 +1,15 @@
 package com.example.zoom
 
+import android.app.Activity
+import android.content.Context
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.app.ActivityCompat.startActivityForResult
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.subject_item.view.*
 
@@ -36,7 +41,17 @@ class Holder(itemView: View) : RecyclerView.ViewHolder(itemView){
             var pos:Int=adapterPosition
 
             var sub_name=itemView.findViewById<TextView>(R.id.subject_name).text.toString()
+            var pro_name=itemView.findViewById<TextView>(R.id.professor_name).text.toString()
+            var sub_code=itemView.findViewById<TextView>(R.id.subject_day).text.toString()
             Log.d("number1", sub_name)
+            val intent = Intent(itemView.context, Subject_Detail::class.java)
+            intent.putExtra("subname", sub_name)
+            intent.putExtra("proname",pro_name)
+            intent.putExtra("code",sub_code)
+            startActivityForResult(itemView.context as Activity,intent,101,null)
+
+
+
         }
     }
 

@@ -77,7 +77,7 @@ class Fragment_subject : Fragment() {
         recycler.adapter=adaptor
         // 레이아웃 매니저 연결
         recycler.layoutManager= LinearLayoutManager(context)
-
+        recycler.scrollToPosition(data.size-1)
     }
 
 
