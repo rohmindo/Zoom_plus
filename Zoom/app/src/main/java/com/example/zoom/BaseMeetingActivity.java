@@ -783,7 +783,7 @@ public class BaseMeetingActivity extends AppCompatActivity implements ZoomInstan
     public void onClickMore(View view) {
         AlertDialog.Builder dlg = new AlertDialog.Builder(this);
         dlg.setTitle("추가 항목을 선택하세요"); //제목
-        final String[] versionArray = new String[] {"참가자","채팅","퀴즈"};
+        final String[] versionArray = new String[] {"참가자","채팅","퀴즈","질문"};
         dlg.setIcon(R.drawable.loggo_prev); // 아이콘 설정
 
         dlg.setItems(versionArray, new DialogInterface.OnClickListener() {
@@ -793,6 +793,9 @@ public class BaseMeetingActivity extends AppCompatActivity implements ZoomInstan
                //채팅
                if(which==1){
                    Intent intent=new Intent(getApplicationContext(),ChatActivity.class);
+                   startActivity(intent);
+               }else if(which==3){
+                   Intent intent=new Intent(getApplicationContext(),QuestionActivity.class);
                    startActivity(intent);
                }
                //Intent intent=new Intent(getApplicationContext(),SignUp_Student.class);
