@@ -13,16 +13,13 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.concurrent.ExecutionException;
 
-public class HttpConnection_join extends AsyncTask<String, Void, String> {
+public class HttpConnection_getSubject extends AsyncTask<String, Void, String> {
     public String temp="";
     public String cookie="";
-    public String code="";
-    public HttpConnection_join(String code){
-        this.code=code;
-    }
-    public String result2() throws ExecutionException, InterruptedException {
-        HttpConnection_join insertdata = new HttpConnection_join(code);
-        temp=insertdata.execute("http://disboard13.kro.kr/api/subject/join",code).get();
+
+    public String result3() throws ExecutionException, InterruptedException {
+        HttpConnection_getSubject insertdata = new HttpConnection_getSubject();
+        temp=insertdata.execute("http://disboard13.kro.kr/api/subject/get/mySubjects").get();
 
         return temp;
     }
@@ -45,9 +42,9 @@ public class HttpConnection_join extends AsyncTask<String, Void, String> {
     protected String doInBackground(String... params) {
         String result="";
         String serverurl = params[0];
-        String code_value = params[1];
-        String postparameters = "code="+code_value;
-        Log.d("testinputs",postparameters);
+        //String code_value = params[1];
+        String postparameters = "";
+        //Log.d("testinputs",postparameters);
         try{
             URL url = new URL(serverurl);
 
@@ -61,13 +58,13 @@ public class HttpConnection_join extends AsyncTask<String, Void, String> {
             conn.setConnectTimeout(10000);
             conn.setUseCaches(false);
             conn.usingProxy();
-            conn.setRequestMethod("PUT");
+            conn.setRequestMethod("GET");
             conn.connect();
-
+/*
             OutputStream outputstream = conn.getOutputStream();
             outputstream.write(postparameters.getBytes("UTF-8"));
             outputstream.flush();
-            outputstream.close();
+            outputstream.close();*/
 
             InputStream inputstream;
 

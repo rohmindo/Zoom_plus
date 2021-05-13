@@ -56,12 +56,7 @@ class SignUpActivity : AppCompatActivity() {
             finish()
         }
 
-        //subject/joint test
-        var tt= HttpConnection_join()
-        tt.result2()
-        var teee=tt.temp
-        //통신결과 tee로 전달됨
-        Log.d("valuess", teee)
+
 
         //회원가입 버튼
         btn_signup.setOnClickListener {

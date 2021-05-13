@@ -6,7 +6,7 @@ import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import com.bumptech.glide.Glide
+import com.example.zoom.httpconnection.HttpConnection_join
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -14,6 +14,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_subject.*
+import org.json.JSONObject
 
 class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener,View.OnClickListener {
     private lateinit var googleSignInClient: GoogleSignInClient
@@ -95,7 +96,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
     }
     fun plus(v: View?) {
         val intent = Intent(this, PopUpActivity::class.java)
-        startActivityForResult(intent,1)
+        startActivityForResult(intent, 1)
 
     }
 
@@ -103,7 +104,32 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         super.onActivityResult(requestCode, resultCode, data)
         if(resultCode== RESULT_OK&&data!=null) {
             var test = data.getStringExtra("result")
-            Log.d("returnaa", test + "")
+            //subject/joint test
+            var tt= HttpConnection_join(test)
+            tt.result2()
+            var teee=tt.temp
+            //통신결과 tee로 전달됨
+            Log.d("valuess", teee)
+            //받은 결과값 json파싱
+            val jObject = JSONObject(teee.toString())
+            val subjectstr=jObject.getString("subject")
+            val jObject2=JSONObject(subjectstr)
+            val sub_name=jObject2.getString("name")
+            //val pro_name=jObject.getString("professor")
+            val code=jObject2.getString("code")
+
+            val fragment = Fragment_subject()
+            val bundle = Bundle()
+            bundle.putString("sub_name",sub_name)
+            bundle.putString("pro_name", "교수이름")
+            bundle.putString("code", code)
+            Log.d("testttt",sub_name+" "+code)
+            fragment.arguments=bundle
+
+            val transaction = supportFragmentManager.beginTransaction()
+            transaction.add(R.id.frame, fragment)
+            transaction.commit()
+
         }
 
     }
