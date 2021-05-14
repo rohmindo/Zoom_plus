@@ -117,18 +117,21 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
             val sub_name=jObject2.getString("name")
             //val pro_name=jObject.getString("professor")
             val code=jObject2.getString("code")
+            if(sub_name.isNullOrBlank()||sub_name.isNullOrEmpty()){
 
-            val fragment = Fragment_subject()
-            val bundle = Bundle()
-            bundle.putString("sub_name",sub_name)
-            bundle.putString("pro_name", "교수이름")
-            bundle.putString("code", code)
-            Log.d("testttt",sub_name+" "+code)
-            fragment.arguments=bundle
+            }else{
+                val fragment = Fragment_subject()
+                val bundle = Bundle()
+                bundle.putString("sub_name",sub_name)
+                bundle.putString("pro_name", "교수이름")
+                bundle.putString("code", code)
+                Log.d("testttt",sub_name+" "+code)
+                fragment.arguments=bundle
 
-            val transaction = supportFragmentManager.beginTransaction()
-            transaction.add(R.id.frame, fragment)
-            transaction.commit()
+                val transaction = supportFragmentManager.beginTransaction()
+                transaction.add(R.id.frame, fragment)
+                transaction.commit()
+            }
 
         }
 

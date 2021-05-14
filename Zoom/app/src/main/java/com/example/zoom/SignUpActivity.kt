@@ -48,7 +48,7 @@ class SignUpActivity : AppCompatActivity() {
         //통신결과 tee로 전달됨
         val jObject = JSONObject(tee)
         val logInisSuccess=jObject.getString("success")
-        Log.d("logintest",logInisSuccess)
+        Log.d("logintest",tee)
         //만약 기존의 로그인 정보가 있다면 메인화면으로 이동
         if(logInisSuccess=="true"){
             val intent=Intent(this, MainActivity::class.java)
