@@ -44,9 +44,15 @@ import com.example.zoom.view.ChatMsgAdapter;
 import com.example.zoom.view.KeyBoardLayout;
 import com.example.zoom.view.UserVideoAdapter;
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
+import io.socket.client.IO;
+import io.socket.client.Socket;
+import io.socket.emitter.Emitter;
+import io.socket.engineio.client.transports.WebSocket;
 import us.zoom.sdk.ZoomInstantSDK;
 import us.zoom.sdk.ZoomInstantSDKAudioHelper;
 import us.zoom.sdk.ZoomInstantSDKAudioRawData;
@@ -148,7 +154,7 @@ public class BaseMeetingActivity extends AppCompatActivity implements ZoomInstan
     protected ZoomInstantSDKSession session;
 
     protected boolean renderWithSurfaceView=true;
-
+    public Socket mSocket;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -156,6 +162,19 @@ public class BaseMeetingActivity extends AppCompatActivity implements ZoomInstan
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED, WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED);
         }
 
+        //소켓연결
+        try{
+            IO.Options opts =new IO.Options();
+            opts.reconnection = true;
+            opts.reconnectionDelay = 1000;
+            opts.timeout = 10000;
+            opts.transports = new String[]{WebSocket.NAME};
+            mSocket = IO.socket(getString(R.string.app_domain)+":3000",opts);
+        }catch (Exception e){
+            Log.e("chaterror", "error "+e.toString());
+        }
+        mSocket.on(Socket.EVENT_CONNECT,Onconnect);
+        mSocket.connect();
         getWindow().addFlags(WindowManager.LayoutParams.
                 FLAG_KEEP_SCREEN_ON);
         setContentView(getLayout());
@@ -170,7 +189,13 @@ public class BaseMeetingActivity extends AppCompatActivity implements ZoomInstan
         initMeeting();
         updateSessionInfo();
     }
+    private Emitter.Listener Onconnect = new Emitter.Listener() {
 
+        @Override
+        public void call(final Object... args) {
+            Log.d("connect!!","connect!!");
+        }
+    };
 
     @Override
     protected void onNewIntent(Intent intent) {
@@ -1223,5 +1248,49 @@ public class BaseMeetingActivity extends AppCompatActivity implements ZoomInstan
     public void onUserNameChanged(ZoomInstantSDKUser user) {
         Log.d(TAG,"onUserNameChanged:"+user);
         
+    }
+    public void onclickunderstandok(View view){
+        AlertDialog.Builder ad = new AlertDialog.Builder(BaseMeetingActivity.this);
+
+        ad.setMessage("'이해가 잘되요' 평가를 전달하겠습니까?");
+
+
+        ad.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                 dialog.dismiss();
+            }
+        });
+
+
+        ad.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        ad.show();
+    }
+    public void onclickunderstandnot(View view){
+        AlertDialog.Builder ad = new AlertDialog.Builder(BaseMeetingActivity.this);
+        ad.setIcon(R.drawable.loggo_small);
+        ad.setMessage("'이해가 안되요' 평가를 전달하겠습니까?");
+
+
+        ad.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+
+        ad.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        ad.show();
     }
 }
