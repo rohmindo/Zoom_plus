@@ -23,6 +23,9 @@ import android.view.Display;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -76,85 +79,53 @@ public class BaseMeetingActivity extends AppCompatActivity implements ZoomInstan
         , UserVideoAdapter.ItemTapListener, ChatMsgAdapter.ItemClickListener {
 
     protected static final String TAG = BaseMeetingActivity.class.getSimpleName();
-
     public static final int RENDER_TYPE_ZOOMRENDERER = 0;
-
     public static final int RENDER_TYPE_OPENGLES = 1;
-
     public final static int REQUEST_SHARE_SCREEN_PERMISSION = 1001;
-
     public final static int REQUEST_SYSTEM_ALERT_WINDOW = 1002;
-
     public final static int REQUEST_SELECT_ORIGINAL_PIC = 1003;
-
     protected Display display;
-
     protected DisplayMetrics displayMetrics;
-
     protected RecyclerView userVideoList;
-
     protected LinearLayout videoListContain;
-
     protected UserVideoAdapter adapter;
-
-
     private Intent mScreenInfoData;
-
     protected ShareToolbar shareToolbar;
-
     protected ImageView iconShare;
-
     protected ImageView iconVideo;
-
     protected ImageView iconAudio;
-
     protected ImageView iconMore;
-
     protected TextView practiceText;
-
     protected TextView sessionNameText;
-
     protected TextView mtvInput;
-
     protected ImageView iconLock;
-
     protected View actionBar;
-
     protected ScrollView actionBarScroll;
-
     protected View btnViewShare;
-
     protected KeyBoardLayout keyBoardLayout;
-
     protected RecyclerView chatListView;
-
     private ChatMsgAdapter chatMsgAdapter;
-
     protected String myDisplayName = "";
     protected String meetingPwd = "";
     protected String sessionName;
     protected int renderType;
-
     protected ImageView videoOffView;
-
     private View shareViewGroup;
-
     private ImageView shareImageView;
-
     protected TextView text_fps;
-
     protected Handler handler = new Handler(Looper.getMainLooper());
-
     protected boolean isActivityPaused = false;
-
     protected ZoomInstantSDKUser mActiveUser;
-
     protected ZoomInstantSDKUser currentShareUser;
-
     protected ZoomInstantSDKSession session;
-
     protected boolean renderWithSurfaceView=true;
     public Socket mSocket;
+    //숨겨진 페이지가 열렸는지 확인하는 변수
+    boolean isPageOpen=false;
+    Animation tranlateLeftAnim;
+    Animation tranlateRightAnim;
+//
+    Button button;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -175,6 +146,20 @@ public class BaseMeetingActivity extends AppCompatActivity implements ZoomInstan
         }
         mSocket.on(Socket.EVENT_CONNECT,Onconnect);
         mSocket.connect();
+
+        //자막 애니메이션 연동
+
+        tranlateLeftAnim= AnimationUtils.loadAnimation(this,R.anim.translate_left);
+        tranlateRightAnim= AnimationUtils.loadAnimation(this,R.anim.translate_right);
+        //페이지 슬라이딩 이벤트가 발생했을때 애니메이션이 시작 됐는지 종료 됐는지 감지할 수 있다.
+        SlidingPageAnimationListener animListener = new SlidingPageAnimationListener();
+        tranlateLeftAnim.setAnimationListener(animListener);
+        tranlateRightAnim.setAnimationListener(animListener);
+
+
+
+
+
         getWindow().addFlags(WindowManager.LayoutParams.
                 FLAG_KEEP_SCREEN_ON);
         setContentView(getLayout());
@@ -189,6 +174,16 @@ public class BaseMeetingActivity extends AppCompatActivity implements ZoomInstan
         initMeeting();
         updateSessionInfo();
     }
+    public void onclickcc(View v){
+
+        LinearLayout page=(LinearLayout)findViewById(R.id.page);
+        if(isPageOpen){
+            page.startAnimation(tranlateRightAnim);
+        }else{
+            page.setVisibility(View.VISIBLE);
+            page.startAnimation(tranlateLeftAnim);
+        }
+    }
     private Emitter.Listener Onconnect = new Emitter.Listener() {
 
         @Override
@@ -196,6 +191,23 @@ public class BaseMeetingActivity extends AppCompatActivity implements ZoomInstan
             Log.d("connect!!","connect!!");
         }
     };
+    private class SlidingPageAnimationListener implements Animation.AnimationListener{
+        @Override public void onAnimationStart(Animation animation) {
+
+        }
+        public void onAnimationEnd(Animation animation){
+            LinearLayout page=(LinearLayout)findViewById(R.id.page);
+            if(isPageOpen){
+                page.setVisibility(View.INVISIBLE);
+                //button.setText("열기");
+                isPageOpen = false;
+            }else{
+                //button.setText("닫기");
+                isPageOpen = true;
+            }
+        }
+        @Override public void onAnimationRepeat(Animation animation) {
+        } }
 
     @Override
     protected void onNewIntent(Intent intent) {
@@ -1292,5 +1304,9 @@ public class BaseMeetingActivity extends AppCompatActivity implements ZoomInstan
             }
         });
         ad.show();
+    }
+    public void SearchOnclick(View v){
+        EditText txt=(EditText)findViewById(R.id.Search_txt);
+        //txt.setText("");
     }
 }

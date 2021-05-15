@@ -28,7 +28,6 @@ class CustomAdaptor_chat : RecyclerView.Adapter<Holderr>() {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holderr {
-        Log.d("name",name)
         if(viewType==1){
             var itemView= LayoutInflater.from(parent.context).inflate(
                 R.layout.chat_item_me,

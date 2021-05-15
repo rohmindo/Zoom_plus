@@ -64,6 +64,5 @@ class QuestionActivity : AppCompatActivity() {
             adapter.notifyDataSetChanged()
         //Log.d("returnaa", test + "")
         }
-
     }
 }
