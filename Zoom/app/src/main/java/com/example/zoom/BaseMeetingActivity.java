@@ -46,10 +46,14 @@ import com.example.zoom.util.ZMAdapterOsBugHelper;
 import com.example.zoom.view.ChatMsgAdapter;
 import com.example.zoom.view.KeyBoardLayout;
 import com.example.zoom.view.UserVideoAdapter;
+import com.google.firebase.auth.FirebaseAuth;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import io.socket.client.IO;
@@ -124,7 +128,8 @@ public class BaseMeetingActivity extends AppCompatActivity implements ZoomInstan
     boolean isPageOpen=false;
     Animation tranlateLeftAnim;
     Animation tranlateRightAnim;
-//
+    //현재시각 가져오기
+    String currenttime="";
     Button button;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -1272,7 +1277,23 @@ public class BaseMeetingActivity extends AppCompatActivity implements ZoomInstan
         ad.setPositiveButton("확인", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                 dialog.dismiss();
+                //현재시각 가져오기
+                long now=System.currentTimeMillis();
+                Date mDate=new Date(now);
+                SimpleDateFormat simpleDate=new SimpleDateFormat("hh:mm");
+                currenttime=simpleDate.format(mDate);
+                JSONObject input_data=new JSONObject();
+                try {
+                    input_data.put("time",currenttime);
+                    input_data.put("name","test");
+                    input_data.put("type","up");
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                mSocket.emit("understandingStu",input_data);
+                Log.d("understand","currenttime : "+currenttime);
+                dialog.dismiss();
             }
         });
 
@@ -1294,6 +1315,21 @@ public class BaseMeetingActivity extends AppCompatActivity implements ZoomInstan
         ad.setPositiveButton("확인", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                //현재시각 가져오기
+                long now=System.currentTimeMillis();
+                Date mDate=new Date(now);
+                SimpleDateFormat simpleDate=new SimpleDateFormat("hh:mm");
+                currenttime=simpleDate.format(mDate);
+                JSONObject input_data=new JSONObject();
+                try {
+                    input_data.put("time",currenttime);
+                    input_data.put("name","test");
+                    input_data.put("type","down");
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                mSocket.emit("understandingStu",input_data);
                 dialog.dismiss();
             }
         });
