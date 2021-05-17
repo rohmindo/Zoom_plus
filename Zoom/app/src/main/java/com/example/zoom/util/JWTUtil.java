@@ -29,7 +29,7 @@ public class JWTUtil {
     public static String customIdentity="test_"+ Build.MODEL;
 
 
-    public static String createJWTAccessToken() {
+    public static String createJWTAccessToken(String tcp_name) {
 
         int version = BuildConfig.VERSION_CODE;
         long iat = System.currentTimeMillis() / 1000;
@@ -47,7 +47,7 @@ public class JWTUtil {
             payLoadObject.put("iat", iat);
             payLoadObject.put("exp", exp);
             payLoadObject.put("user_identity",customIdentity);
-            payLoadObject.put("tpc","harry");
+            payLoadObject.put("tpc",tcp_name);
         } catch (Exception e) {
             Log.e(TAG, e.toString());
         }

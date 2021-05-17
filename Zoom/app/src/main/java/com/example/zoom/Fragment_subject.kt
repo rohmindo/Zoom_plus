@@ -36,14 +36,14 @@ class Fragment_subject : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let{
-
+            /*
             val sub_name = it.getString("sub_name")
             val pro_name = it.getString("pro_name")
             val sub_code = it.getString("code")
             Log.d("testtt","값 들어옴"+sub_name+" "+pro_name+" "+sub_code)
             var temp_data:Subject= Subject(sub_name.toString(),"."+pro_name,sub_code.toString())
             data.add(temp_data)
-            adaptor.notifyDataSetChanged()
+            adaptor.notifyDataSetChanged()*/
         }
 
     }

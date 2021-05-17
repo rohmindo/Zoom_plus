@@ -314,7 +314,7 @@ public class BaseSessionActivity extends AppCompatActivity implements View.OnCli
         //GET START
         String token = Constants.TOKEN;
         if (TextUtils.isEmpty(token)) {
-            token = JWTUtil.createJWTAccessToken();
+            token = JWTUtil.createJWTAccessToken("harry");
         }
 
         if (TextUtils.isEmpty(token)) {

@@ -995,6 +995,8 @@ public class BaseMeetingActivity extends AppCompatActivity implements ZoomInstan
     @Override
     public void onSessionLeave() {
         Log.d(TAG, "onSessionLeave");
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
         finish();
     }
 
@@ -1307,6 +1309,6 @@ public class BaseMeetingActivity extends AppCompatActivity implements ZoomInstan
     }
     public void SearchOnclick(View v){
         EditText txt=(EditText)findViewById(R.id.Search_txt);
-        //txt.setText("");
+        txt.setText("");
     }
 }

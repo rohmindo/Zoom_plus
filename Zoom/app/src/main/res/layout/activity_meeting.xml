@@ -94,8 +94,8 @@
 
                         <ImageView
                             android:id="@+id/meeting_lock_status"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
                             android:layout_marginLeft="14dp"
                             android:src="@drawable/small_lock" />
 
@@ -364,7 +364,7 @@
     <LinearLayout
         android:gravity="top"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="70dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
         <Button
@@ -379,6 +379,7 @@
         android:layout_width="match_parent"
         android:orientation="vertical"
         android:id="@+id/page"
+        android:visibility="gone"
         android:background="#8c808080"
         android:layout_gravity="bottom"
         android:layout_margin="20dp"

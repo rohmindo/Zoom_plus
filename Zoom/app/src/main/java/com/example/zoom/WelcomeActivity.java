@@ -48,6 +48,10 @@ public class WelcomeActivity extends AppCompatActivity {
         initPages();
         initDots();
         initSDK();
+        //바로넘어가게끔
+        Intent intent = new Intent(this, JoinSessionActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
     }
 
     private void initPages() {
