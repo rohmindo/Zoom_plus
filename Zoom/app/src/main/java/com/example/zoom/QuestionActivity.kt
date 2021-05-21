@@ -9,13 +9,26 @@ import android.view.View
 import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.auth.FirebaseAuth
+import io.socket.client.IO
+import io.socket.client.Socket
+import io.socket.engineio.client.EngineIOException
+import io.socket.engineio.client.transports.WebSocket
+import kotlinx.android.synthetic.main.activity_chat.*
 import kotlinx.android.synthetic.main.activity_question.*
 import kotlinx.android.synthetic.main.item_question.*
+import org.json.JSONObject
+import kotlin.concurrent.thread
 
 class QuestionActivity : AppCompatActivity() {
     public lateinit var QuestionList: List<Question>
     public lateinit var adapter: ExpandableAdapter
     public lateinit var Questions:ArrayList<Question>
+    lateinit var mSocket: Socket
+    var mAuth= FirebaseAuth.getInstance()
+    val user=mAuth.currentUser
+    var name=user.displayName
+    var Tempcount:Int=1
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,7 +53,45 @@ class QuestionActivity : AppCompatActivity() {
         adapter = ExpandableAdapter(QuestionList)
 
         recyclerView.adapter = adapter
-
+        //소켓연결
+        try{
+            val opts = IO.Options()
+            opts.reconnection = true;
+            opts.reconnectionDelay = 1000;
+            opts.timeout = 10000;
+            opts.transports = arrayOf(WebSocket.NAME)
+            mSocket = IO.socket(getString(R.string.app_domain)+":3000",opts)
+        }catch (e:Exception){
+            Log.e("chaterror", e.printStackTrace().toString())
+        }
+        mSocket.connect()
+        //연결 테스트
+        mSocket.on(Socket.EVENT_CONNECT) {
+            //연결됨
+            Log.i("socket", "connect")
+            var data= JSONObject()
+            //개인이름
+            data.put("name",name)
+            //수업코드만 셋팅하면됨
+            data.put("code","1234")
+            mSocket.emit("user",data)
+        }.on(Socket.EVENT_CONNECT_ERROR) { args ->
+            //연결 에러
+            if (args[0] is EngineIOException) {
+                Log.i("socket", args[0].toString())
+            }
+            Log.i("socket", "connect error" + args[0].toString())
+        }.on("sendQ"){ args ->
+            var inputmsg=JSONObject(args[0].toString())
+            var content=inputmsg.getString("content")
+            var new:Question= Question(content,0,"")
+            thread(){
+                runOnUiThread {
+                    Questions.add(new)
+                    adapter.notifyDataSetChanged()
+                }
+            }
+        }
         //데이터 받으면 1 < index 내용,댓글수,원래 comment + 추가된 내용
         //Questions.set(1,Question("asdf","22",추가))
         //adapter.notifyDataSetChanged()
@@ -62,6 +113,11 @@ class QuestionActivity : AppCompatActivity() {
             var test = data.getStringExtra("result")
             Questions.add(Question(test.toString(),0,""))
             adapter.notifyDataSetChanged()
+            var question_Data=JSONObject();
+            question_Data.put("content",test.toString());
+            question_Data.put("qNum",Tempcount)
+            Tempcount++
+            mSocket.emit("question",question_Data)
         //Log.d("returnaa", test + "")
         }
     }
