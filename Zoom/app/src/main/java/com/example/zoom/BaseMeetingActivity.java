@@ -193,7 +193,17 @@ public class BaseMeetingActivity extends AppCompatActivity implements ZoomInstan
 
         @Override
         public void call(final Object... args) {
-            Log.d("connect!!","connect!!");
+            Log.i("socket", "connect");
+            JSONObject data=new JSONObject();
+            try {
+                data.put("name","민도");
+                data.put("code","1234");
+                Log.d("connect!!","connect!!");
+                mSocket.emit("user",data);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
         }
     };
     private class SlidingPageAnimationListener implements Animation.AnimationListener{
