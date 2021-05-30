@@ -96,6 +96,7 @@
                 android:textStyle="bold"
                 android:layout_height="match_parent"/>
             <ImageView
+                android:id="@+id/schedule_move"
                 android:layout_width="0dp"
                 android:src="@drawable/next"
                 android:layout_gravity="center|right"

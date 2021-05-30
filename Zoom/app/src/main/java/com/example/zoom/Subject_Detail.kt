@@ -1,5 +1,6 @@
 package com.example.zoom
 
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.PorterDuff
 import androidx.appcompat.app.AppCompatActivity
@@ -28,5 +29,13 @@ class Subject_Detail : AppCompatActivity() {
         subject_take.setColorFilter(Color.parseColor("#00a000"),PorterDuff.Mode.SRC_IN)
         subject_chart.setColorFilter(Color.parseColor("#00a000"),PorterDuff.Mode.SRC_IN)
 
+
+        //강의계획서 및 강의정보 클릭시
+        schedule_move.setOnClickListener {
+            val intent = Intent(this, Subject_Schedule::class.java)
+            startActivity(intent)
+            finish()
+        }
     }
+    //공지사항
 }
