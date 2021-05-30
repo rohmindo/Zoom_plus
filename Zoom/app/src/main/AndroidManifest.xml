@@ -15,11 +15,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Subject_Schedule"></activity>
+        <activity android:name=".Subject_Alarm"></activity>
+        <activity android:name=".Subject_Schedule" />
         <activity
             android:name=".PopUpActivity_Question"
             android:theme="@android:style/Theme.Dialog" />
-        <activity android:name=".QuestionActivity"></activity>
+        <activity android:name=".QuestionActivity" />
         <activity android:name=".Subject_Detail" />
         <activity android:name=".ChatActivity" />
         <activity

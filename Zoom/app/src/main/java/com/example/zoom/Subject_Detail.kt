@@ -36,6 +36,11 @@ class Subject_Detail : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
+        alarm_onclick.setOnClickListener { 
+            var intent=Intent(this,Subject_Alarm::class.java)
+            startActivity(intent)
+            finish()
+        }
     }
     //공지사항
 }

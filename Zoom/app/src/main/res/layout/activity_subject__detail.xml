@@ -131,6 +131,7 @@
                 android:textStyle="bold"
                 android:layout_height="match_parent"/>
             <ImageView
+                android:id="@+id/alarm_onclick"
                 android:layout_width="0dp"
                 android:src="@drawable/next"
                 android:layout_gravity="center|right"
